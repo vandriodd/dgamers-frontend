@@ -4,3 +4,20 @@
   padding: 2rem;
   text-align: center;
 }
+
+.header {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  align-items: center;
+}
+
+.header-logo {
+  width: 45px;
+  height: 45px;
+}
+
+.header-text {
+  font-size: 2rem;
+  font-weight: bold;
+}

@@ -1,0 +1,26 @@
+[
+  {
+    "id": 1,
+    "title": "Completar proyecto en React",
+    "description": "Finalizar el frontend para la aplicación de gestión de tareas de DGamers.",
+    "completed": false
+  },
+  {
+    "id": 2,
+    "title": "Revisar la documentación de la API",
+    "description": "Asegurarse de que todos los endpoints estén correctamente implementados en el frontend.",
+    "completed": false
+  },
+  {
+    "id": 3,
+    "title": "Probar operaciones CRUD",
+    "description": "Realizar pruebas manuales y automatizadas para las acciones de crear, leer, actualizar y eliminar.",
+    "completed": false
+  },
+  {
+    "id": 4,
+    "title": "Diseñar prototipo en Figma",
+    "description": "Crear un diseño de interfaz de usuario para la aplicación utilizando Figma.",
+    "completed": true
+  }
+]
