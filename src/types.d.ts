@@ -2,7 +2,7 @@ export interface TodoType {
   id: number
   title: string
   description: string
-  completed: boolean
+  completed: boolean | number
 }
 
 export type TodoCreate = (todo: Omit<TodoType, 'id' | 'completed'>) => void
