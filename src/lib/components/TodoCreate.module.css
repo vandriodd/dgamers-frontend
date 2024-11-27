@@ -1,0 +1,19 @@
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  max-width: 400px;
+}
+
+.input {
+  color: black;
+  border-radius: 5px;
+  width: 100%;
+}
+
+.textarea {
+  resize: none;
+  font-size: 14px;
+  border-radius: 5px;
+  width: 100%;
+}
