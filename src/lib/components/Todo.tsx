@@ -9,6 +9,8 @@ import {
 import { useState } from 'react'
 import { Dialog } from 'primereact/dialog'
 import TodoEdit from './TodoEdit'
+import { Card } from 'primereact/card'
+import styles from './Todo.module.css'
 
 interface TodoProps {
   todo: TodoType
@@ -25,27 +27,40 @@ export default function Todo({ todo, onEdit, onDelete, onToggle }: TodoProps) {
   }
 
   return (
-    <>
-      <div>
-        <Checkbox
-          checked={todo.completed}
-          onChange={() => onToggle({ id: todo.id, completed: !todo.completed })}
-        />
-        <div>
-          <h4>{todo.title}</h4>
-          <p>{todo.description}</p>
+    <section className={styles.cardWrapper}>
+      <Card className={styles.card}>
+        <div className={styles.goCorner}>
+          <div className={styles.goArrow}>→</div>
         </div>
-        <Button
-          label='Editar'
-          icon='pi pi-pencil'
-          onClick={() => handleVisibility(true)}
-        />
-        <Button
-          label='Eliminar'
-          icon='pi pi-times'
-          onClick={() => onDelete({ id: todo.id })}
-        />
-      </div>
+
+        <h3 className={styles.cardTitle}>{todo.title}</h3>
+        <p>{todo.description}</p>
+
+        <div className={styles.cardFooter}>
+          <Checkbox
+            checked={todo.completed}
+            onChange={() =>
+              onToggle({ id: todo.id, completed: !todo.completed })
+            }
+          />
+          <span>{todo.completed ? 'Completada' : 'Pendiente'}</span>
+        </div>
+
+        <div className={styles.buttons}>
+          <Button
+            label=''
+            icon='pi pi-pencil'
+            className='p-button-text'
+            onClick={() => handleVisibility(true)}
+          />
+          <Button
+            label=''
+            icon='pi pi-times'
+            className='p-button-text'
+            onClick={() => onDelete({ id: todo.id })}
+          />
+        </div>
+      </Card>
       <Dialog
         header='Editar tarea'
         visible={isEditing}
@@ -60,6 +75,6 @@ export default function Todo({ todo, onEdit, onDelete, onToggle }: TodoProps) {
           handleVisibility={handleVisibility}
         />
       </Dialog>
-    </>
+    </section>
   )
 }
