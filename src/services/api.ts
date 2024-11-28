@@ -1,12 +1,17 @@
+import { AxiosError } from 'axios'
 import { dgamers } from '../api/dgamers'
 import { TodoType } from '../types'
 
 export async function getTodos(): Promise<[string] | [null, TodoType[]]> {
   try {
     const res = await dgamers.get<{ response: TodoType[] }>('/tasks')
+
     return [null, res.data.response]
   } catch (err) {
-    if (err instanceof Error) {
+    if (err instanceof AxiosError) {
+      if (err.response?.status === 404) {
+        return [null, []]
+      }
       return [err.message]
     }
 

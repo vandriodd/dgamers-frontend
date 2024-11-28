@@ -2,16 +2,19 @@ import TodoList from './lib/components/TodoList'
 import TodoCreate from './lib/components/TodoCreate'
 import './App.css'
 import { useTodos } from './hooks/useTodos'
+import Filters from './lib/components/Filters'
 
 function App() {
   const {
-    error,
     todos,
+    error,
     isLoading,
+    filterSelected,
     handleCreate,
     handleDelete,
     handleEdit,
-    handleToggleCompleted
+    handleToggleCompleted,
+    handleFilterChange
   } = useTodos()
 
   return (
@@ -22,15 +25,21 @@ function App() {
       </header>
       <main>
         <TodoCreate onCreate={handleCreate} />
-        {error != null && <div>{error}</div>}
-        {isLoading && <div>Loading...</div>}
+        {error != null && <p>{error}</p>}
+        {isLoading && <p className='message'>Loading...</p>}
         {!isLoading && !error && (
-          <TodoList
-            todos={todos}
-            onDelete={handleDelete}
-            onEdit={handleEdit}
-            onToggle={handleToggleCompleted}
-          />
+          <>
+            <Filters
+              filterSelected={filterSelected}
+              onFilterChange={handleFilterChange}
+            />
+            <TodoList
+              todos={todos}
+              onDelete={handleDelete}
+              onEdit={handleEdit}
+              onToggle={handleToggleCompleted}
+            />
+          </>
         )}
       </main>
     </>

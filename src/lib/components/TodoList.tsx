@@ -21,7 +21,7 @@ export default function TodoList({
   todos
 }: TodoProps) {
   return (
-    <section className={styles.listWrapper}>
+    <article className={styles.listWrapper}>
       <div>
         {todos.length > 0 ? (
           todos.map((todo) => (
@@ -34,9 +34,9 @@ export default function TodoList({
             />
           ))
         ) : (
-          <p>No hay tareas disponibles</p>
+          <p className={styles.message}>No hay tareas disponibles</p>
         )}
       </div>
-    </section>
+    </article>
   )
 }

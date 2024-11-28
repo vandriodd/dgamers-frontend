@@ -1,3 +1,5 @@
+import { TODO_FILTERS } from './consts'
+
 export interface TodoType {
   id: number
   title: string
@@ -13,3 +15,6 @@ export type TodoEdit = (
 export type TodoToggleCompleted = (
   todo: Pick<TodoType, 'id' | 'completed'>
 ) => void
+
+export type FilterValue = (typeof TODO_FILTERS)[keyof typeof TODO_FILTERS]
+export type FilterChangeType = (filter: FilterValue) => void

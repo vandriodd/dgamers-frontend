@@ -6,13 +6,17 @@ import {
   toggleCompleted,
   updateTodo
 } from '../services/api'
-import { TodoType } from '../types'
+import { FilterValue, TodoType } from '../types'
+import { TODO_FILTERS } from '../consts'
 
 export function useTodos() {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [todos, setTodos] = useState<TodoType[]>([])
   const [isFetching, setIsFetching] = useState(false)
+  const [filterSelected, setFilterSelected] = useState<FilterValue>(
+    TODO_FILTERS.ALL
+  )
 
   useEffect(() => {
     getTodos()
@@ -111,13 +115,25 @@ export function useTodos() {
     })
   }
 
+  const handleFilterChange = (filter: FilterValue) => {
+    setFilterSelected(filter)
+  }
+
+  const filteredTodos = todos.filter((todo) => {
+    if (filterSelected === TODO_FILTERS.PENDING) return !todo.completed
+    if (filterSelected === TODO_FILTERS.COMPLETED) return todo.completed
+    return todo
+  })
+
   return {
-    todos,
+    todos: filteredTodos,
     error,
     isLoading,
+    filterSelected,
     handleToggleCompleted,
     handleDelete,
     handleEdit,
-    handleCreate
+    handleCreate,
+    handleFilterChange
   }
 }

@@ -37,9 +37,8 @@ export default function Todo({ todo, onEdit, onDelete, onToggle }: TodoProps) {
         />
         <label
           htmlFor={`todo-${todo.id}`}
-          className={classNames({
-            [styles.labelCompleted]: todo.completed
-          })}
+          data-completed={todo.completed}
+          className={styles.labelCompleted}
         >
           Completada
         </label>

@@ -1,7 +1,7 @@
 .cardWrapper {
   display: flex;
   justify-content: center;
-  margin: 1rem 0;
+  margin-bottom: 1rem;
 }
 
 .card {
@@ -66,6 +66,10 @@
 }
 
 .labelCompleted {
+  cursor: pointer;
+}
+
+.labelCompleted[data-completed='true'] {
   color: var(--primary-color);
 }
 
