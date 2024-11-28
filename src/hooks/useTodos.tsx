@@ -12,6 +12,7 @@ export function useTodos() {
   const [error, setError] = useState<string | null>(null)
   const [isLoading, setIsLoading] = useState(true)
   const [todos, setTodos] = useState<TodoType[]>([])
+  const [isFetching, setIsFetching] = useState(false)
 
   useEffect(() => {
     getTodos()
@@ -20,14 +21,14 @@ export function useTodos() {
           setError(err)
           return
         }
-        for (let i = 0; i < data.length; i++) {
-          if (data[i].completed === 1) {
-            data[i].completed = true
-          } else {
-            data[i].completed = false
-          }
+        const parsedData = []
+
+        for (let i = data.length - 1; i >= 0; i--) {
+          data[i].completed = data[i].completed === 1
+          parsedData.push(data[i])
         }
-        setTodos(data)
+
+        setTodos(parsedData)
       })
       .finally(() => setIsLoading(false))
   }, [])
@@ -51,14 +52,22 @@ export function useTodos() {
   }
 
   const handleDelete = ({ id }: Pick<TodoType, 'id'>) => {
-    deleteTodo({ id }).then(([err]) => {
-      if (err != null) {
-        setError(err)
-        return
-      }
+    if (isFetching) {
+      return
+    }
 
-      setTodos((prevState) => prevState.filter((todo) => todo.id !== id))
-    })
+    setIsFetching(true)
+
+    deleteTodo({ id })
+      .then(([err]) => {
+        if (err != null) {
+          setError(err)
+          return
+        }
+
+        setTodos((prevState) => prevState.filter((todo) => todo.id !== id))
+      })
+      .finally(() => setIsFetching(false))
   }
 
   const handleEdit = ({
@@ -66,16 +75,23 @@ export function useTodos() {
     title,
     description
   }: Pick<TodoType, 'id' | 'title' | 'description'>) => {
-    updateTodo({ id, title, description }).then(([err]) => {
-      if (err != null) {
-        setError(err)
-        return
-      }
+    if (isFetching) {
+      return
+    }
+    setIsFetching(true)
 
-      setTodos((prevState) =>
-        prevState.map((t) => (t.id === id ? { ...t, title, description } : t))
-      )
-    })
+    updateTodo({ id, title, description })
+      .then(([err]) => {
+        if (err != null) {
+          setError(err)
+          return
+        }
+
+        setTodos((prevState) =>
+          prevState.map((t) => (t.id === id ? { ...t, title, description } : t))
+        )
+      })
+      .finally(() => setIsFetching(false))
   }
 
   const handleCreate = ({
@@ -91,17 +107,17 @@ export function useTodos() {
         return
       }
 
-      setTodos((prevState) => [...prevState, todo])
+      setTodos((prevState) => [todo, ...prevState])
     })
   }
 
   return {
     todos,
     error,
+    isLoading,
     handleToggleCompleted,
     handleDelete,
     handleEdit,
-    handleCreate,
-    isLoading
+    handleCreate
   }
 }

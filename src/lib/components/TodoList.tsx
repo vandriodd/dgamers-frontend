@@ -5,6 +5,7 @@ import type {
   TodoType
 } from '../../types'
 import Todo from './Todo'
+import styles from './TodoList.module.css'
 
 interface TodoProps {
   todos: TodoType[]
@@ -20,7 +21,7 @@ export default function TodoList({
   todos
 }: TodoProps) {
   return (
-    <section>
+    <section className={styles.listWrapper}>
       <div>
         {todos.length > 0 ? (
           todos.map((todo) => (

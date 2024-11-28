@@ -1,92 +1,74 @@
 .cardWrapper {
-  margin: 1rem;
+  display: flex;
+  justify-content: center;
+  margin: 1rem 0;
 }
 
 .card {
-  display: block;
-  position: relative;
-  max-width: 262px;
-  background-color: #ffffff;
-  border-radius: 4px;
-  padding: 32px 24px;
-  margin: 12px;
-  text-decoration: none;
-  overflow: hidden;
-  border: 1px solid #cccccc;
-  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  border-radius: 8px;
+  background-color: #fff;
+  border: 1px solid #dcdcdc;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease-in-out;
 }
 
 .card:hover {
-  border: 1px solid #cd3d73;
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
-  transform: scale(1.03);
+  border-color: var(--primary-color);
+  transform: scale(1.01);
 }
 
-.card:hover .goCorner {
-  margin-right: -12px;
-}
-
-.card:hover .buttons {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.goCorner {
-  position: absolute;
-  top: 0;
-  right: 0;
-  background-color: #00838d;
-  height: 100%;
-  width: 16px;
-  padding-right: 9px;
-  transform: skew(6deg);
-  transition: all 0.3s ease;
-  background-image: linear-gradient(-45deg, #8f479a 1%, #dc2a74 100%);
-}
-
-.goArrow {
-  position: absolute;
-  top: 10px;
-  right: -10px;
-  transform: skew(-6deg);
-  font-size: 1rem;
-  font-weight: bold;
-  color: white;
-  opacity: 0;
-  transition: opacity 0.3s ease;
-}
-
-.card:hover .goArrow {
-  opacity: 1;
-}
-
-.buttons {
-  position: absolute;
-  bottom: 8px;
-  right: 8px;
-  display: flex;
-  gap: 0.5rem;
-  opacity: 0;
-  transform: translateY(10px);
-  transition: opacity 0.3s, transform 0.3s;
+.cardContent {
+  margin-top: 2rem;
 }
 
 .cardTitle {
-  margin-top: 8px;
+  margin: 0;
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--primary-color);
+  transition: color 0.3s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.cardDescription {
+  margin: 8px 0 0;
+  font-size: 1rem;
+  color: #555;
+  transition: color 0.3s ease;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 .cardFooter {
   display: flex;
   align-items: center;
-  gap: 8px;
-  margin-top: 1rem;
+  justify-content: space-between;
+  gap: 0.5rem;
 }
 
-.cardFooter span {
+.cardFooter label {
   font-weight: bold;
   font-size: 0.9rem;
+  padding-left: 0.5rem;
 }
 
-.p-checkbox {
-  margin-right: 0.5rem;
+.buttons {
+  gap: 0.5rem;
+}
+
+.completed {
+  text-decoration: line-through;
+  font-style: italic;
+}
+
+.labelCompleted {
+  color: var(--primary-color);
+}
+
+.dialog {
+  width: 50vw;
 }

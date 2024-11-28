@@ -10,6 +10,7 @@ import { useState } from 'react'
 import { Dialog } from 'primereact/dialog'
 import TodoEdit from './TodoEdit'
 import { Card } from 'primereact/card'
+import classNames from 'classnames'
 import styles from './Todo.module.css'
 
 interface TodoProps {
@@ -26,48 +27,73 @@ export default function Todo({ todo, onEdit, onDelete, onToggle }: TodoProps) {
     setIsEditing(value != null ? value : !isEditing)
   }
 
+  const footer = () => (
+    <div className={styles.cardFooter}>
+      <div className={styles.checkbox}>
+        <Checkbox
+          inputId={`todo-${todo.id}`}
+          checked={!!todo.completed}
+          onChange={() => onToggle({ id: todo.id, completed: !todo.completed })}
+        />
+        <label
+          htmlFor={`todo-${todo.id}`}
+          className={classNames({
+            [styles.labelCompleted]: todo.completed
+          })}
+        >
+          Completada
+        </label>
+      </div>
+      <div className={styles.buttons}>
+        <Button
+          label=''
+          icon='pi pi-pencil'
+          className='p-button-rounded p-button-text'
+          onClick={() => handleVisibility(true)}
+        />
+        <Button
+          label=''
+          icon='pi pi-times'
+          className='p-button-rounded p-button-text p-button-danger'
+          onClick={() => onDelete({ id: todo.id })}
+        />
+      </div>
+    </div>
+  )
+
+  const title = () => (
+    <h3
+      className={classNames(styles.cardTitle, {
+        [styles.completed]: todo.completed
+      })}
+    >
+      {todo.title}
+    </h3>
+  )
+
+  const description = () => (
+    <p
+      className={classNames(styles.cardDescription, {
+        [styles.completed]: todo.completed
+      })}
+    >
+      {todo.description !== null ? todo.description : 'Sin descripción'}
+    </p>
+  )
+
   return (
     <section className={styles.cardWrapper}>
-      <Card className={styles.card}>
-        <div className={styles.goCorner}>
-          <div className={styles.goArrow}>→</div>
-        </div>
-
-        <h3 className={styles.cardTitle}>{todo.title}</h3>
-        <p>{todo.description}</p>
-
-        <div className={styles.cardFooter}>
-          <Checkbox
-            checked={todo.completed}
-            onChange={() =>
-              onToggle({ id: todo.id, completed: !todo.completed })
-            }
-          />
-          <span>{todo.completed ? 'Completada' : 'Pendiente'}</span>
-        </div>
-
-        <div className={styles.buttons}>
-          <Button
-            label=''
-            icon='pi pi-pencil'
-            className='p-button-text'
-            onClick={() => handleVisibility(true)}
-          />
-          <Button
-            label=''
-            icon='pi pi-times'
-            className='p-button-text'
-            onClick={() => onDelete({ id: todo.id })}
-          />
-        </div>
-      </Card>
+      <Card
+        className={styles.card}
+        title={title}
+        subTitle={description}
+        footer={footer}
+      />
       <Dialog
         header='Editar tarea'
         visible={isEditing}
-        style={{ width: '50vw' }}
-        onHide={() => {
-          handleVisibility(false)
-        }}
+        onHide={() => handleVisibility(false)}
+        className={styles.dialog}
       >
         <TodoEdit
           todo={todo}

@@ -1,20 +1,23 @@
 :root {
-  --primary: #9a0808;
-  --accent: #ffbf50;
-  --bg-dark: #1a1a1a;
+  --primary-rgb: 99, 102, 241;
+  --primary-color: #6366f1;
+  --bg: #f9fafb;
+  --bg-highlight: #eef2ff;
   --white: #ffffff;
+  --black: #000000;
   font-family: Poppins, sans-serif;
   line-height: 1.5;
   font-weight: 400;
 
-  color-scheme: light dark;
-  color: var(--white);
-  background-color: var(--bg-dark);
+  color-scheme: only light;
+  color: var(--black);
+  background-color: var(--bg);
 
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  scroll-behavior: smooth;
 }
 
 body {
