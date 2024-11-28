@@ -6,12 +6,12 @@
 
 ## **Índice** 📚
 
-1. [Objetivo](#objetivo)
-2. [Tecnologías Utilizadas](#tecnologías-utilizadas)
-3. [Requisitos Previos](#requisitos-previos)
-4. [Configuración del Proyecto](#configuración-del-proyecto)
-5. [Funciones Implementadas](#funciones-implementadas)
-6. [Extras](#extras)
+1. [Objetivo](#objetivo-)
+2. [Tecnologías Utilizadas](#tecnologías-utilizadas-)
+3. [Requisitos Previos](#requisitos-previos-)
+4. [Configuración del Proyecto](#configuración-del-proyecto-)
+5. [Funciones Implementadas](#funciones-implementadas-)
+6. [Extras](#extras-)
 
 ## **Objetivo** 🎯
 
@@ -21,7 +21,7 @@ El objetivo de esta prueba técnica es demostrar habilidades en desarrollo front
 - Crear nuevas tareas.
 - Editar tareas existentes.
 - Eliminar tareas.
-- Cambiar el estado de una tarea _(completada o pendiente)_ desde un **checkbox** en la tarjeta de cada tarea.  
+- Cambiar el estado de una tarea _(completada o pendiente)_ desde un **checkbox** en la tarjeta de cada tarea.
 - **Extra**: Filtrar tareas por estado: **todas**, **completadas** o **pendientes**.
 
 ## **Tecnologías Utilizadas** 🛠️
@@ -34,7 +34,8 @@ El objetivo de esta prueba técnica es demostrar habilidades en desarrollo front
 
 ## **Requisitos Previos** 🧰
 
-Asegúrate de tener instalado:  
+Asegúrate de tener instalado:
+
 - **Node.js** (v16 o superior).
 - Un gestor de paquetes como **npm**, **yarn** o **pnpm**.
 
@@ -59,8 +60,8 @@ Asegúrate de tener instalado:
 
 3. **Configurar las variables de entorno:**
 
-   - Crear un archivo `.env` en la _raíz_ del proyecto.  
-   - Agregar la línea:  
+   - Crear un archivo `.env` en la _raíz_ del proyecto.
+   - Agregar la línea:
 
      ```plaintext
      VITE_PUBLIC_TOKEN=tu_token_de_autorizacion
@@ -79,29 +80,34 @@ Asegúrate de tener instalado:
    pnpm run dev
    ```
 
-5. 🌐 **Abrir la aplicación**: Visita [http://localhost:5173](http://localhost:5173) en tu navegador. ¡Y listo! 🎉  
+5. 🌐 **Abrir la aplicación**: Visita [http://localhost:5173](http://localhost:5173) en tu navegador. ¡Y listo! 🎉
 
 ## **Funciones Implementadas** 🔧
 
 1. **Mostrar lista de tareas** 📋
+
    - Realiza una petición `GET` a `/tasks` para recuperar las tareas desde la API.
    - Las tareas se muestran dinámicamente utilizando componentes de PrimeReact.
 
 2. **Crear tareas** ➕
+
    - Realiza una petición `POST` a `/tasks`.
    - Campos:
      - `title` _(requerido)_.
      - `description` _(opcional)_.
 
 3. **Editar tareas** ✏️
+
    - Realiza una petición `PUT` a `/tasks/{id}` para actualizar los campos:
      - `title` _(requerido)_.
      - `description` _(opcional)_.
 
 4. **Eliminar tareas** 🗑️
+
    - Realiza una petición `DELETE` a `/tasks/{id}`.
 
 5. **Cambiar estado** 🔄
+
    - Cambia el estado _(completada o pendiente)_ utilizando un **checkbox** en la tarjeta de la tarea.
 
 6. **Filtrar tareas** 🔍
